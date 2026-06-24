@@ -1,0 +1,115 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+
+const navItems = [
+  "Home",
+  "About",
+  "Experience",
+  "Projects",
+  "Research",
+  "Achievements",
+  "Contact",
+];
+
+export function HeroSection() {
+  return (
+    <section className="relative min-h-screen overflow-hidden bg-primaryRed">
+      {/* Background Image */}
+      <Image
+        src="/images/hero/hero.jpg"
+        alt="Divya Singh Hero"
+        fill
+        priority
+        className="object-cover object-center"
+      />
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#8B0000]/85 via-[#B11226]/45 to-transparent" />
+
+      {/* Navbar */}
+      <header className="absolute inset-x-0 top-0 z-20">
+        <div className="mx-auto flex w-full max-w-[1500px] items-center justify-between px-16 pt-8">
+          <h2 className="text-[22px] font-extrabold tracking-tight text-white">
+            NS Divya Singh
+            <span className="text-white/90">.</span>
+          </h2>
+
+          <nav className="hidden items-center gap-10 lg:flex">
+            {navItems.map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-sm font-semibold text-white/95 transition-all duration-300 hover:text-white"
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+
+          <Button className="hidden lg:inline-flex">
+            Resume
+          </Button>
+        </div>
+      </header>
+
+      {/* Hero Content */}
+      <motion.div
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1500px] items-start px-16 pt-40"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.9,
+          ease: "easeOut",
+          delay: 0.15,
+        }}
+      >
+        <div className="max-w-[720px]">
+          {/* Heading */}
+          <h1 className="text-[52px] font-extrabold leading-[1.02] tracking-[-0.05em] text-white">
+            <span className="block">
+              Hi, I&apos;m
+            </span>
+
+            <span className="mt-3 block text-[68px] leading-[0.95]">
+              NS Divya Singh
+            </span>
+          </h1>
+
+        {/* Roles */}
+          <p className="mt-8 text-[22px] font-bold tracking-tight text-white/95">
+            AI Engineer <span className="mx-2 text-white/70">•</span>
+            Researcher <span className="mx-2 text-white/70">•</span>
+            Builder
+          </p>
+
+          {/* Description */}
+          <p className="mt-7 max-w-[700px] text-[18px] leading-[1.6] text-white/90">
+            Building intelligent systems, conducting impactful
+            research, and transforming innovative ideas into
+            products that create real-world value.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="mt-10 flex flex-wrap items-center gap-5">
+            <Button
+              className="h-12 rounded-full px-6 text-sm font-semibold"
+            >
+              Explore Projects
+            </Button>
+
+            <Button
+              size="default"
+              variant="outline"
+              className="h-12 rounded-full border-white/50 bg-transparent px-6 text-sm font-semibold text-white hover:bg-white hover:text-black"
+            >
+              Download Resume
+            </Button>
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
