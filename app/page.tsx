@@ -3,9 +3,12 @@
 import { useState } from "react";
 
 import { AboutSection } from "@/components/about-section";
+import { ContactSection } from "@/components/contact-section";
 import { ExpertiseSection } from "@/components/expertise-section";
+import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/hero-section";
 import { IntroLoader } from "@/components/intro-loader";
+import { ProjectsSection } from "@/components/projects-section";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { TechStackSection } from "@/components/tech-stack-section";
 
@@ -20,6 +23,9 @@ export default function Home() {
       <AboutSection />
       <ExpertiseSection />
       <TechStackSection />
+      <ProjectsSection />
+      <ContactSection />
+      <Footer />
     </>
   );
 }
