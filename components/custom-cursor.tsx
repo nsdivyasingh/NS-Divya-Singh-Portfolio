@@ -4,19 +4,22 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CustomCursor() {
+  const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
+  const [clicking, setClicking] = useState(false);
 
-  const mouseX = useMotionValue(-200);
-  const mouseY = useMotionValue(-200);
+  const mouseX = useMotionValue(-300);
+  const mouseY = useMotionValue(-300);
 
-  // Ring lags slightly behind — gives the trailing feel
-  const ringX = useSpring(mouseX, { stiffness: 150, damping: 20, mass: 0.4 });
-  const ringY = useSpring(mouseY, { stiffness: 150, damping: 20, mass: 0.4 });
+  // Ring trails with spring — dot follows instantly
+  const ringX = useSpring(mouseX, { stiffness: 180, damping: 22, mass: 0.4 });
+  const ringY = useSpring(mouseY, { stiffness: 180, damping: 22, mass: 0.4 });
 
   useEffect(() => {
-    // Only show on pointer-capable devices (not touch-only)
+    // Only activate on pointer devices — safe to call window here (client only)
     if (!window.matchMedia("(pointer: fine)").matches) return;
+    setReady(true);
 
     const onMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
@@ -24,15 +27,17 @@ export function CustomCursor() {
     };
     const onEnter = () => setVisible(true);
     const onLeave = () => setVisible(false);
+    const onDown = () => setClicking(true);
+    const onUp = () => setClicking(false);
 
-    // Detect hovering over interactive elements for scale effect
+    // Detect interactive elements for the expanded hover state
     const onOver = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).closest("a, button, [role='button'], input, textarea, select, label")) {
+      if ((e.target as HTMLElement).closest('a, button, [role="button"], input, textarea, select, label')) {
         setHovering(true);
       }
     };
     const onOut = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).closest("a, button, [role='button'], input, textarea, select, label")) {
+      if ((e.target as HTMLElement).closest('a, button, [role="button"], input, textarea, select, label')) {
         setHovering(false);
       }
     };
@@ -40,61 +45,62 @@ export function CustomCursor() {
     window.addEventListener("mousemove", onMove);
     document.addEventListener("mouseenter", onEnter);
     document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("mouseup", onUp);
     document.addEventListener("mouseover", onOver);
     document.addEventListener("mouseout", onOut);
-
-    // Hide default cursor
-    document.documentElement.style.cursor = "none";
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseenter", onEnter);
       document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("mouseup", onUp);
       document.removeEventListener("mouseover", onOver);
       document.removeEventListener("mouseout", onOut);
-      document.documentElement.style.cursor = "";
     };
   }, [mouseX, mouseY]);
 
-  if (typeof window !== "undefined" && !window.matchMedia("(pointer: fine)").matches) {
-    return null;
-  }
+  if (!ready) return null;
 
   return (
     <>
-      {/* Inner dot — instant follow */}
+      {/* Dot — snaps to cursor instantly, shrinks on hover (ring takes focus) */}
       <motion.div
         className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full bg-[#ff2a2a]"
         style={{
+          width: 7,
+          height: 7,
           x: mouseX,
           y: mouseY,
           translateX: "-50%",
           translateY: "-50%",
         }}
         animate={{
-          width: hovering ? 10 : 6,
-          height: hovering ? 10 : 6,
+          scale: clicking ? 0.5 : hovering ? 0 : 1,
           opacity: visible ? 1 : 0,
         }}
-        transition={{ duration: 0.15 }}
+        transition={{ duration: 0.12, ease: "easeOut" }}
       />
 
-      {/* Outer ring — spring lagged */}
+      {/* Ring — spring-lagged, expands + fills slightly on hover */}
       <motion.div
         className="fixed top-0 left-0 z-[9998] pointer-events-none rounded-full border border-[#ff2a2a]"
         style={{
+          width: 36,
+          height: 36,
           x: ringX,
           y: ringY,
           translateX: "-50%",
           translateY: "-50%",
         }}
         animate={{
-          width: hovering ? 44 : 32,
-          height: hovering ? 44 : 32,
-          opacity: visible ? (hovering ? 0.5 : 0.35) : 0,
-          borderColor: hovering ? "#ff2a2a" : "rgba(255,42,42,0.6)",
+          scale: clicking ? 0.85 : hovering ? 1.5 : 1,
+          opacity: visible ? 1 : 0,
+          borderColor: hovering ? "rgba(255,42,42,0.9)" : "rgba(255,42,42,0.45)",
+          backgroundColor: hovering ? "rgba(255,42,42,0.08)" : "rgba(255,42,42,0)",
         }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.18, ease: "easeOut" }}
       />
     </>
   );
