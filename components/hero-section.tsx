@@ -4,19 +4,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-const navItems = [
-  "Home",
-  "About",
-  "Experience",
-  "Projects",
-  "Research",
-  "Achievements",
-  "Contact",
-];
-
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-primaryRed">
+    <section id="hero" className="relative min-h-screen overflow-hidden bg-primaryRed">
       {/* Background Image */}
       <Image
         src="/images/hero/hero.jpg"
@@ -28,32 +18,6 @@ export function HeroSection() {
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#8B0000]/85 via-[#B11226]/45 to-transparent" />
-
-      {/* Navbar */}
-      <header className="absolute inset-x-0 top-0 z-20">
-        <div className="mx-auto flex w-full max-w-[1500px] items-center justify-between px-16 pt-8">
-          <h2 className="text-[22px] font-extrabold tracking-tight text-white">
-            NS Divya Singh
-            <span className="text-white/90">.</span>
-          </h2>
-
-          <nav className="hidden items-center gap-10 lg:flex">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-sm font-semibold text-white/95 transition-all duration-300 hover:text-white"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-
-          <Button className="hidden lg:inline-flex">
-            Resume
-          </Button>
-        </div>
-      </header>
 
       {/* Hero Content */}
       <motion.div

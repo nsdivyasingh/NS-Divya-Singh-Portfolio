@@ -8,6 +8,7 @@ import { ExpertiseSection } from "@/components/expertise-section";
 import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/hero-section";
 import { IntroLoader } from "@/components/intro-loader";
+import { Navbar } from "@/components/navbar";
 import { ProjectsSection } from "@/components/projects-section";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { TechStackSection } from "@/components/tech-stack-section";
@@ -18,6 +19,7 @@ export default function Home() {
   return (
     <>
       <SmoothScroll />
+      <Navbar />
       {!introDone && <IntroLoader onComplete={() => setIntroDone(true)} />}
       <HeroSection />
       <AboutSection />
