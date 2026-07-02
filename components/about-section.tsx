@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { CountUp } from "@/components/count-up";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -108,7 +109,10 @@ export function AboutSection() {
               className="rounded-2xl border border-lightBeige bg-cardWhite px-8 py-10"
             >
               <p className="text-[40px] font-extrabold leading-none tracking-[-0.04em] text-accentRed">
-                {stat.value}
+                <CountUp
+                  to={parseInt(stat.value)}
+                  suffix={stat.value.replace(/[0-9]/g, "")}
+                />
               </p>
               <p className="mt-3 text-[15px] font-medium leading-snug text-textSecondary">
                 {stat.label}

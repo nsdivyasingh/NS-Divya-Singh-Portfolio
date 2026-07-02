@@ -23,3 +23,10 @@ body {
   background: var(--primary-red);
   color: #ffffff;
 }
+
+/* Custom cursor — hide default on pointer devices; touch devices retain default */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}

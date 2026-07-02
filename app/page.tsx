@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
+import { CustomCursor } from "@/components/custom-cursor";
 import { ExpertiseSection } from "@/components/expertise-section";
 import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/hero-section";
@@ -19,6 +20,7 @@ export default function Home() {
   return (
     <>
       <SmoothScroll />
+      <CustomCursor />
       <Navbar />
       {!introDone && <IntroLoader onComplete={() => setIntroDone(true)} />}
       <HeroSection />
