@@ -41,7 +41,11 @@ export function ContactSection() {
       alert("Please accept the contact permission checkbox.");
       return;
     }
-    alert(`Thanks ${form.firstName}! Message captured.`);
+    const subject = encodeURIComponent(`Portfolio Contact from ${form.firstName} ${form.lastName}`);
+    const body = encodeURIComponent(
+      `Name: ${form.firstName} ${form.lastName}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+    );
+    window.open(`mailto:naveensinghdivyasingh@gmail.com?subject=${subject}&body=${body}`, "_blank");
     setForm(initialState);
   };
 
@@ -53,14 +57,14 @@ export function ContactSection() {
     >
       <motion.div
         style={{ y }}
-        className="absolute top-0 left-0 w-full h-full flex flex-col justify-start items-center overflow-hidden pointer-events-none z-0 pt-16 md:pt-12"
+        className="absolute top-0 left-0 pointer-events-none z-0 pt-8 md:pt-10 pl-2"
       >
-        <h1
-          className="text-[25vw] leading-[0.75] font-black text-white uppercase tracking-tighter select-none scale-y-[1.6] origin-top"
-          style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}
+        <span
+          className="select-none font-extrabold uppercase leading-none tracking-[-0.05em] text-white block"
+          style={{ fontSize: "250px", opacity: 1, fontFamily: "'Impact', 'Arial Black', sans-serif" }}
         >
           Contact
-        </h1>
+        </span>
       </motion.div>
 
       <div className="relative z-10 w-full flex justify-end items-end">
@@ -86,6 +90,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="First Name"
                     required
+                    suppressHydrationWarning
                     className="w-full bg-transparent border-b border-white/40 pb-3 text-lg focus:outline-none focus:border-white transition-colors placeholder-white font-medium rounded-none"
                   />
                 </div>
@@ -97,6 +102,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="Last Name"
                     required
+                    suppressHydrationWarning
                     className="w-full bg-transparent border-b border-white/40 pb-3 text-lg focus:outline-none focus:border-white transition-colors placeholder-white font-medium rounded-none"
                   />
                 </div>
@@ -108,6 +114,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="Email"
                     required
+                    suppressHydrationWarning
                     className="w-full bg-transparent border-b border-white/40 pb-3 text-lg focus:outline-none focus:border-white transition-colors placeholder-white font-medium rounded-none"
                   />
                 </div>
@@ -120,6 +127,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="Type your message here"
                     required
+                    suppressHydrationWarning
                     className="w-full h-full min-h-[120px] bg-transparent border-b border-white/40 pb-3 text-lg focus:outline-none focus:border-white transition-colors placeholder-white font-medium resize-none rounded-none"
                   />
                 </div>
@@ -133,6 +141,7 @@ export function ContactSection() {
                   id="permission"
                   checked={form.permission}
                   onChange={handleChange}
+                  suppressHydrationWarning
                   className="mt-1 w-4 h-4 rounded-sm border-white/40 bg-transparent text-white focus:ring-white focus:ring-offset-0 focus:ring-offset-transparent cursor-pointer"
                   style={{ accentColor: "white" }}
                 />
@@ -162,6 +171,7 @@ export function ContactSection() {
                   </p>
                   <button
                     type="submit"
+                    suppressHydrationWarning
                     className="px-8 py-3 rounded-full border border-white/40 text-white font-bold flex items-center justify-center gap-3 hover:bg-white hover:text-[#ff2a2a] transition-all duration-300 group whitespace-nowrap self-start sm:self-auto"
                   >
                     Send

@@ -1,7 +1,11 @@
+import { useRef } from "react";
+import VariableProximity from "./variable-proximity";
+
 const CONTACT_EMAIL = "naveensinghdivyasingh@gmail.com";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <footer className="bg-[#111111] text-[#d4d4d4] py-16 px-6 md:px-12 w-full font-mono text-[10px] md:text-xs tracking-widest flex flex-col justify-between min-h-[50vh]">
@@ -26,9 +30,19 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="w-full flex justify-center items-center py-20 md:py-24 overflow-hidden">
-        <h2 className="text-[18vw] md:text-[16vw] leading-none font-sans font-bold tracking-tighter lowercase select-none text-[#f4f4f4] w-full text-center">
-          Divya Singh
+      <div 
+        ref={containerRef}
+        className="w-full flex justify-center items-center py-20 md:py-24 overflow-hidden relative"
+      >
+        <h2 className="text-[18vw] md:text-[16vw] leading-none font-bold tracking-tighter lowercase select-none text-[#f4f4f4] w-full text-center">
+          <VariableProximity
+            label="divya singh"
+            fromFontVariationSettings="'wght' 400, 'opsz' 9"
+            toFontVariationSettings="'wght' 1000, 'opsz' 40"
+            containerRef={containerRef}
+            radius={240}
+            falloff="linear"
+          />
         </h2>
       </div>
 
