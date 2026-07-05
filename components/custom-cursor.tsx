@@ -3,43 +3,41 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
+// Sections that have dark/red backgrounds → white cursor
+const DARK_SECTIONS = new Set(["hero", "contact"]);
+// Sections that have light backgrounds → red cursor
+const LIGHT_SECTIONS = new Set(["about", "expertise", "skills", "projects"]);
+
 export function CustomCursor() {
   const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [clicking, setClicking] = useState(false);
+  const [onDarkBg, setOnDarkBg] = useState(true); // hero is first section
 
   const mouseX = useMotionValue(-300);
   const mouseY = useMotionValue(-300);
 
-  // Ring trails with spring — dot follows instantly
-  const ringX = useSpring(mouseX, { stiffness: 180, damping: 22, mass: 0.4 });
-  const ringY = useSpring(mouseY, { stiffness: 180, damping: 22, mass: 0.4 });
+  const ringX = useSpring(mouseX, { stiffness: 150, damping: 20, mass: 0.5 });
+  const ringY = useSpring(mouseY, { stiffness: 150, damping: 20, mass: 0.5 });
 
   useEffect(() => {
-    // Only activate on pointer devices — safe to call window here (client only)
     if (!window.matchMedia("(pointer: fine)").matches) return;
     setReady(true);
 
-    const onMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
+    // Mouse tracking
+    const onMove = (e: MouseEvent) => { mouseX.set(e.clientX); mouseY.set(e.clientY); };
     const onEnter = () => setVisible(true);
     const onLeave = () => setVisible(false);
     const onDown = () => setClicking(true);
     const onUp = () => setClicking(false);
-
-    // Detect interactive elements for the expanded hover state
     const onOver = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).closest('a, button, [role="button"], input, textarea, select, label')) {
+      if ((e.target as HTMLElement).closest('a, button, [role="button"], input, textarea, select, label'))
         setHovering(true);
-      }
     };
     const onOut = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).closest('a, button, [role="button"], input, textarea, select, label')) {
+      if ((e.target as HTMLElement).closest('a, button, [role="button"], input, textarea, select, label'))
         setHovering(false);
-      }
     };
 
     window.addEventListener("mousemove", onMove);
@@ -50,6 +48,24 @@ export function CustomCursor() {
     document.addEventListener("mouseover", onOver);
     document.addEventListener("mouseout", onOut);
 
+    // Section-aware background detection → switch cursor color
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const id = entry.target.id;
+          if (DARK_SECTIONS.has(id)) setOnDarkBg(true);
+          else if (LIGHT_SECTIONS.has(id)) setOnDarkBg(false);
+        }
+      },
+      { rootMargin: "-35% 0px -60% 0px" }
+    );
+
+    [...DARK_SECTIONS, ...LIGHT_SECTIONS].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
     return () => {
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseenter", onEnter);
@@ -58,49 +74,55 @@ export function CustomCursor() {
       document.removeEventListener("mouseup", onUp);
       document.removeEventListener("mouseover", onOver);
       document.removeEventListener("mouseout", onOut);
+      observer.disconnect();
     };
   }, [mouseX, mouseY]);
 
   if (!ready) return null;
 
+  const dotColor = onDarkBg ? "#ffffff" : "#ff2a2a";
+  const ringColor = onDarkBg ? "rgba(255,255,255,0.65)" : "rgba(255,42,42,0.65)";
+  const ringHoverColor = onDarkBg ? "rgba(255,255,255,0.9)" : "rgba(255,42,42,0.9)";
+  const ringHoverBg = onDarkBg ? "rgba(255,255,255,0.08)" : "rgba(255,42,42,0.08)";
+
   return (
     <>
-      {/* Dot — snaps to cursor instantly, shrinks on hover (ring takes focus) */}
+      {/* Dot — snaps instantly, shrinks on hover */}
       <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full bg-[#ff2a2a]"
+        className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full"
         style={{
-          width: 7,
-          height: 7,
+          width: 10,
+          height: 10,
           x: mouseX,
           y: mouseY,
           translateX: "-50%",
           translateY: "-50%",
         }}
         animate={{
-          scale: clicking ? 0.5 : hovering ? 0 : 1,
+          scale: clicking ? 0.4 : hovering ? 0 : 1,
           opacity: visible ? 1 : 0,
+          backgroundColor: dotColor,
         }}
-        transition={{ duration: 0.12, ease: "easeOut" }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
       />
-
-      {/* Ring — spring-lagged, expands + fills slightly on hover */}
+      {/* Ring — spring-lagged, expands on hover */}
       <motion.div
-        className="fixed top-0 left-0 z-[9998] pointer-events-none rounded-full border border-[#ff2a2a]"
+        className="fixed top-0 left-0 z-[9998] pointer-events-none rounded-full border-2"
         style={{
-          width: 36,
-          height: 36,
+          width: 40,
+          height: 40,
           x: ringX,
           y: ringY,
           translateX: "-50%",
           translateY: "-50%",
         }}
         animate={{
-          scale: clicking ? 0.85 : hovering ? 1.5 : 1,
+          scale: clicking ? 0.75 : hovering ? 1.5 : 1,
           opacity: visible ? 1 : 0,
-          borderColor: hovering ? "rgba(255,42,42,0.9)" : "rgba(255,42,42,0.45)",
-          backgroundColor: hovering ? "rgba(255,42,42,0.08)" : "rgba(255,42,42,0)",
+          borderColor: hovering ? ringHoverColor : ringColor,
+          backgroundColor: hovering ? ringHoverBg : "rgba(0,0,0,0)",
         }}
-        transition={{ duration: 0.18, ease: "easeOut" }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
       />
     </>
   );

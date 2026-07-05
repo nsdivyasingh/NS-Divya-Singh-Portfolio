@@ -1,0 +1,27 @@
+.curved-loop-jacket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  contain: layout style;
+}
+
+.curved-loop-svg {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  width: 100%;
+  overflow: visible;
+  display: block;
+  /*
+    2vw keeps the font in constant SVG user-unit size at any viewport width.
+    When viewport = W px, CSS 2vw = 0.02W px. The SVG viewBox is 1440 wide,
+    so the user-unit scale = 1440/W, giving: 0.02W × (1440/W) = 28.8 SVG units
+    regardless of W. This ensures the text always fits the path.
+  */
+  font-size: 2vw;
+  fill: #ff2a2a;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
