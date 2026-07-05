@@ -6,7 +6,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 // Sections that have dark/red backgrounds → white cursor
 const DARK_SECTIONS = new Set(["hero", "contact"]);
 // Sections that have light backgrounds → red cursor
-const LIGHT_SECTIONS = new Set(["about", "expertise", "skills", "projects"]);
+const LIGHT_SECTIONS = new Set(["about", "expertise", "skills", "projects", "research", "blog"]);
 
 export function CustomCursor() {
   const [ready, setReady] = useState(false);

@@ -104,9 +104,10 @@ export function AboutSection() {
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
         >
           {stats.map((stat) => (
-            <div
+            <motion.div
               key={stat.label}
-              className="rounded-2xl border border-lightBeige bg-cardWhite px-8 py-10"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="rounded-2xl border border-lightBeige bg-cardWhite px-8 py-10 shadow-sm hover:border-red-400 hover:shadow-[0_15px_30px_rgba(255,42,42,0.06)] transition-all duration-500 cursor-default"
             >
               <p className="text-[40px] font-extrabold leading-none tracking-[-0.04em] text-accentRed">
                 <CountUp
@@ -117,7 +118,7 @@ export function AboutSection() {
               <p className="mt-3 text-[15px] font-medium leading-snug text-textSecondary">
                 {stat.label}
               </p>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>
