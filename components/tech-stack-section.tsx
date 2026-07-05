@@ -95,7 +95,8 @@ function StackCard({ category, skills }: { category: string; skills: string[] })
               variants={pillVariants}
               initial="initial"
               whileHover="hover"
-              className="px-3 py-1.5 text-xs font-medium text-black bg-black/3 hover:bg-red-500/10 border border-black/5 hover:border-red-500/20 rounded-full transition-all duration-300 cursor-default select-none hover:text-red-500"
+              suppressHydrationWarning
+              className="px-3 py-1.5 text-xs font-medium text-black bg-black/[0.03] hover:bg-red-500/10 border border-black/5 hover:border-red-500/20 rounded-full transition-all duration-300 cursor-default select-none hover:text-red-500"
             >
               {skill}
             </motion.button>
@@ -125,7 +126,7 @@ export function TechStackSection() {
           className="mb-10 md:mb-12"
         >
           <div className="mb-3">
-            <span className="inline-block text-xs font-semibold text-black/50 uppercase tracking-widest px-3 py-1.5 bg-black/2 border border-black/5 rounded-full">
+            <span className="inline-block text-xs font-semibold text-black/50 uppercase tracking-widest px-3 py-1.5 bg-black/[0.02] border border-black/5 rounded-full">
               Technical Stack
             </span>
           </div>

@@ -265,10 +265,10 @@ function OtherRepositoriesCarousel() {
     <div className="w-full">
       <div className="mb-10 flex flex-wrap justify-between items-end gap-6">
         <div className="relative max-w-xl">
-          <div className="inline-block border border-gray-300 rounded-full px-4 py-1 text-xs font-bold text-gray-600 mb-4 shadow-sm bg-white">
+          <div className="w-fit border border-gray-300 rounded-full px-4 py-1 text-xs font-bold text-gray-600 mb-4 shadow-sm bg-white">
             Repository Index
           </div>
-          <h3 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight relative inline-block">
+          <h3 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight relative block">
             Other Repositories
             <svg
               className="absolute -bottom-2 left-0 w-32 h-2 text-[#ff2a2a]/40"
@@ -290,6 +290,7 @@ function OtherRepositoriesCarousel() {
             type="button"
             onClick={() => handleNav("prev")}
             aria-label="Scroll left"
+            suppressHydrationWarning
             className="p-4 rounded-full border border-gray-300 text-gray-800 bg-white hover:border-[#ff2a2a] hover:bg-[#ff2a2a] hover:text-white hover:scale-105 active:scale-95 shadow-sm transition-all duration-300 flex items-center justify-center"
           >
             <ChevronLeft className="w-5 h-5" strokeWidth={2.5} />
@@ -298,6 +299,7 @@ function OtherRepositoriesCarousel() {
             type="button"
             onClick={() => handleNav("next")}
             aria-label="Scroll right"
+            suppressHydrationWarning
             className="p-4 rounded-full border border-gray-300 text-gray-800 bg-white hover:border-[#ff2a2a] hover:bg-[#ff2a2a] hover:text-white hover:scale-105 active:scale-95 shadow-sm transition-all duration-300 flex items-center justify-center"
           >
             <ChevronRight className="w-5 h-5" strokeWidth={2.5} />

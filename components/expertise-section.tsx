@@ -212,7 +212,7 @@ export function ExpertiseSection() {
           <path
             d={PATH_D}
             fill="none"
-            stroke="black"
+            stroke="#ff2a2a"
             strokeWidth="2"
             strokeDasharray="8 10"
             mask="url(#expertise-path-mask)"
@@ -246,7 +246,7 @@ export function ExpertiseSection() {
           <path
             d="M 2,0 L 2,100"
             fill="none"
-            stroke="black"
+            stroke="#ff2a2a"
             strokeWidth="4"
             strokeDasharray="4 6"
             mask="url(#expertise-path-mask-mobile)"
