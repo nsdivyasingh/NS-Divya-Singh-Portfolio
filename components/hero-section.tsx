@@ -59,17 +59,21 @@ export function HeroSection() {
           {/* CTA Buttons */}
           <div className="mt-10 flex flex-wrap items-center gap-5">
             <Button
+              asChild
               className="h-12 rounded-full px-6 text-sm font-semibold"
             >
-              Explore Projects
+              <a href="#projects">Explore Projects</a>
             </Button>
 
             <Button
+              asChild
               size="default"
               variant="outline"
               className="h-12 rounded-full border-white/50 bg-transparent px-6 text-sm font-semibold text-white hover:bg-white hover:text-black"
             >
-              Download Resume
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download>
+                Download Resume
+              </a>
             </Button>
           </div>
         </div>

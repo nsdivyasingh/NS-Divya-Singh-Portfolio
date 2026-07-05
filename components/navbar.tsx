@@ -8,6 +8,8 @@ const links = [
   { label: "Expertise", href: "#expertise" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Research", href: "#research" },
+  { label: "Blog", href: "#blog" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -103,8 +105,8 @@ export function Navbar() {
 
           {/* Hire Me CTA */}
           <a
-            href="#contact"
-            className={`hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
+            href="mailto:naveensinghdivyasingh@gmail.com?subject=Hiring%20Inquiry"
+            className={`hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold transition-all duration-150 ${
               isLight
                 ? "bg-[#ff2a2a] text-white hover:bg-red-700"
                 : "border border-white/40 text-white hover:bg-white hover:text-black"
@@ -167,7 +169,7 @@ export function Navbar() {
                 );
               })}
               <a
-                href="#contact"
+                href="mailto:naveensinghdivyasingh@gmail.com?subject=Hiring%20Inquiry"
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-bold bg-[#ff2a2a] text-white hover:bg-red-700 transition-colors"
               >

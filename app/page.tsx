@@ -12,6 +12,8 @@ import { IntroLoader } from "@/components/intro-loader";
 import { Navbar } from "@/components/navbar";
 import { CurvedLoop } from "@/components/curved-loop";
 import { ProjectsSection } from "@/components/projects-section";
+import { ResearchSection } from "@/components/research-section";
+import { BlogSection } from "@/components/blog-section";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { TechStackSection } from "@/components/tech-stack-section";
 
@@ -37,6 +39,8 @@ export default function Home() {
         />
       </div>
       <ProjectsSection />
+      <ResearchSection />
+      <BlogSection />
       <ContactSection />
       <Footer />
     </>
