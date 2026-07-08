@@ -166,9 +166,9 @@ export function RibbonsPlayground() {
             label="Length"
             liveValue={liveTrail}
             display={String(liveTrail)}
-            min={80}
+            min={0}
             max={1000}
-            step={20}
+            step={10}
             onLive={setLiveTrail}
             onCommit={(v) => { setTrail(v); setLiveTrail(v); }}
           />

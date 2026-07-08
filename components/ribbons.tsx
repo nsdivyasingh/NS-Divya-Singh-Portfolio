@@ -43,7 +43,9 @@ export function Ribbons({
     let cancelled = false;
 
     import("ogl").then(({ Renderer, Transform, Vec3, Color, Polyline }) => {
-      if (cancelled) return;
+      if (cancelled || !container) return;
+      // Alias with explicit non-null type so nested function declarations retain it
+      const el: HTMLDivElement = container;
 
       const renderer = new Renderer({
         dpr: Math.min(window.devicePixelRatio || 1, 2),
@@ -59,7 +61,7 @@ export function Ribbons({
       canvas.style.left = "0";
       canvas.style.width = "100%";
       canvas.style.height = "100%";
-      container.appendChild(canvas);
+      el.appendChild(canvas);
 
       const scene = new Transform();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -121,7 +123,7 @@ export function Ribbons({
       `;
 
       function resize() {
-        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setSize(el.clientWidth, el.clientHeight);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         lines.forEach((l: any) => l.polyline.resize());
       }
@@ -171,7 +173,7 @@ export function Ribbons({
 
       function updateMouse(e: MouseEvent | TouchEvent) {
         mouseActive = true;
-        const rect = container.getBoundingClientRect();
+        const rect = el.getBoundingClientRect();
         let x: number, y: number;
         if ("changedTouches" in e && e.changedTouches.length) {
           x = e.changedTouches[0].clientX - rect.left;
@@ -181,18 +183,20 @@ export function Ribbons({
           y = (e as MouseEvent).clientY - rect.top;
         }
         mouse.set(
-          (x / container.clientWidth) * 2 - 1,
-          (y / container.clientHeight) * -2 + 1,
+          (x / el.clientWidth) * 2 - 1,
+          (y / el.clientHeight) * -2 + 1,
           0
         );
       }
 
-      container.addEventListener("mousemove", updateMouse);
-      container.addEventListener("touchstart", updateMouse, { passive: true });
-      container.addEventListener("touchmove", updateMouse, { passive: true });
+      el.addEventListener("mousemove", updateMouse);
+      el.addEventListener("touchstart", updateMouse, { passive: true });
+      el.addEventListener("touchmove", updateMouse, { passive: true });
 
-      // Trail alpha: higher maxAge → more friction → longer trail
-      const trailAlpha = Math.pow(baseFriction, 500 / Math.max(80, maxAge));
+      // Higher maxAge → lower alpha → each point follows more slowly → longer ribbon
+      // maxAge=0 → alpha=0.99 (near-instant snap = dot/very short)
+      // maxAge=1000 → alpha=0.29 (slow follow = very long sweeping trail)
+      const trailAlpha = 0.99 - (maxAge / 1000) * 0.7;
 
       let lastTime = performance.now();
 
@@ -237,15 +241,15 @@ export function Ribbons({
       }
       update();
 
-      // Attach cleanup to the container element for the effect return to call
-      (container as HTMLDivElement & { _rCleanup?: () => void })._rCleanup = () => {
+      // Attach cleanup to the element for the effect return to call
+      (el as HTMLDivElement & { _rCleanup?: () => void })._rCleanup = () => {
         cancelled = true;
         cancelAnimationFrame(frameId);
         window.removeEventListener("resize", resize);
-        container.removeEventListener("mousemove", updateMouse);
-        container.removeEventListener("touchstart", updateMouse);
-        container.removeEventListener("touchmove", updateMouse);
-        if (canvas.parentNode === container) container.removeChild(canvas);
+        el.removeEventListener("mousemove", updateMouse);
+        el.removeEventListener("touchstart", updateMouse);
+        el.removeEventListener("touchmove", updateMouse);
+        if (canvas.parentNode === el) el.removeChild(canvas);
       };
     });
 
