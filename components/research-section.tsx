@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ParticleCard } from "./magic-bento";
 
 const researchPapers = [
   {
@@ -80,14 +81,24 @@ export function ResearchSection() {
             <motion.div
               key={paper.title}
               variants={cardVariants}
-              className="group bg-white border border-gray-200 rounded-[2rem] p-1.5 relative flex flex-col items-center hover:scale-[1.02] hover:border-red-400 hover:shadow-[0_20px_50px_rgba(255,42,42,0.08)] transition-all duration-700"
+              className="magic-bento-card--border-glow group bg-white border border-gray-200 rounded-[2rem] p-1.5 relative flex flex-col items-center hover:scale-[1.02] hover:border-red-400 hover:shadow-[0_20px_50px_rgba(255,42,42,0.08)] transition-all duration-700"
+              onMouseMove={(e) => {
+                const r = e.currentTarget.getBoundingClientRect();
+                e.currentTarget.style.setProperty("--glow-x", `${((e.clientX - r.left) / r.width) * 100}%`);
+                e.currentTarget.style.setProperty("--glow-y", `${((e.clientY - r.top) / r.height) * 100}%`);
+                e.currentTarget.style.setProperty("--glow-intensity", "1");
+              }}
+              onMouseLeave={(e) => e.currentTarget.style.setProperty("--glow-intensity", "0")}
             >
               {/* Rivet design */}
               <div className="w-4 h-4 bg-gradient-to-br from-gray-300 to-gray-100 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] absolute top-3 border border-gray-300 z-10 flex items-center justify-center">
                 <div className="w-1.5 h-1.5 bg-gray-800 rounded-full opacity-10" />
               </div>
 
-              <div className="w-full h-full rounded-[1.4rem] mt-6 p-6 md:p-8 flex flex-col justify-between min-h-[280px] bg-[#f4f4f4] group-hover:bg-red-50/10 transition-colors duration-700">
+              <ParticleCard
+                className="w-full h-full rounded-[1.4rem] mt-6 p-6 md:p-8 flex flex-col justify-between min-h-[280px] bg-[#f4f4f4] group-hover:bg-red-50/10 transition-colors duration-700"
+                particleCount={5}
+              >
                 <div>
                   <div className="flex flex-wrap gap-2 items-center justify-between mb-4">
                     <span className="text-[10px] uppercase tracking-wider font-extrabold text-[#ff2a2a]/95 px-2.5 py-1 rounded bg-[#ff2a2a]/5 border border-[#ff2a2a]/10">
@@ -133,7 +144,7 @@ export function ResearchSection() {
                     </svg>
                   </a>
                 </div>
-              </div>
+              </ParticleCard>
             </motion.div>
           ))}
         </motion.div>

@@ -61,7 +61,7 @@ export function ContactSection() {
       >
         <span
           className="select-none font-extrabold uppercase leading-none tracking-[-0.05em] text-white block"
-          style={{ fontSize: "250px", opacity: 1, fontFamily: "'Impact', 'Arial Black', sans-serif" }}
+          style={{ fontSize: "clamp(80px, 16vw, 160px)", opacity: 0.9, fontFamily: "'Impact', 'Arial Black', sans-serif" }}
         >
           Contact
         </span>

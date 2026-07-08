@@ -77,6 +77,7 @@ export function CurvedLoop({
 
   return (
     <div className={`curved-loop-jacket ${className}`}>
+      {/* ── Desktop ≥768px: SVG curved marquee ── */}
       <svg
         className="curved-loop-svg"
         viewBox={`0 0 1440 ${viewH}`}
@@ -87,21 +88,29 @@ export function CurvedLoop({
         <defs>
           <path ref={pathElRef} id={pathId} d={curvePath} />
         </defs>
-
-        {/* Hidden single-rep: measures how much of the path one repetition occupies */}
         <text style={{ visibility: "hidden" }} aria-hidden="true">
           <textPath ref={measureRef} href={`#${pathId}`} startOffset="0%">
             {marqueeText}
           </textPath>
         </text>
-
-        {/* Visible text — reps will be updated dynamically in useEffect */}
         <text>
           <textPath ref={textPathRef} href={`#${pathId}`} startOffset="0%">
             {marqueeText.repeat(10)}
           </textPath>
         </text>
       </svg>
+
+      {/* ── Mobile <768px: flat CSS marquee ── */}
+      <div
+        className="curved-loop-flat"
+        style={{ "--cl-dur": `${70 / speed}s` } as React.CSSProperties}
+        aria-label={marqueeText}
+      >
+        <div className="curved-loop-flat__track">
+          <span aria-hidden="true">{marqueeText.repeat(4)}</span>
+          <span aria-hidden="true">{marqueeText.repeat(4)}</span>
+        </div>
+      </div>
     </div>
   );
 }

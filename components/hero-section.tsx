@@ -22,7 +22,7 @@ export function HeroSection() {
 
       {/* Hero Content */}
       <motion.div
-        className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1500px] items-start px-16 pt-40"
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1500px] items-start px-6 sm:px-12 md:px-16 pt-40"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -33,25 +33,25 @@ export function HeroSection() {
       >
         <div className="max-w-[720px]">
           {/* Heading */}
-          <h1 className="text-[52px] font-extrabold leading-[1.02] tracking-[-0.05em] text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-[52px] font-extrabold leading-[1.02] tracking-[-0.05em] text-white">
             <span className="block">
               Hi, I&apos;m
             </span>
 
-            <span className="mt-3 block text-[68px] leading-[0.95]">
+            <span className="mt-3 block text-5xl sm:text-6xl md:text-[68px] leading-[0.95]">
               NS Divya Singh
             </span>
           </h1>
 
         {/* Roles */}
-          <p className="mt-8 text-[22px] font-bold tracking-tight text-white/95">
+          <p className="mt-8 text-lg sm:text-xl md:text-[22px] font-bold tracking-tight text-white/95">
             AI Engineer <span className="mx-2 text-white/70">•</span>
             Researcher <span className="mx-2 text-white/70">•</span>
             Builder
           </p>
 
           {/* Description */}
-          <p className="mt-7 max-w-[700px] text-[18px] leading-[1.6] text-white/90">
+          <p className="mt-7 max-w-[700px] text-base sm:text-lg md:text-[18px] leading-[1.6] text-white/90">
             Building intelligent systems, conducting impactful
             research, and transforming innovative ideas into
             products that create real-world value.

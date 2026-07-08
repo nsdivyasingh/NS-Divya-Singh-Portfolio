@@ -25,10 +25,28 @@ export function CustomCursor() {
     if (!window.matchMedia("(pointer: fine)").matches) return;
     setReady(true);
 
+    let isFirstMove = true;
+
     // Mouse tracking
-    const onMove = (e: MouseEvent) => { mouseX.set(e.clientX); mouseY.set(e.clientY); };
-    const onEnter = () => setVisible(true);
-    const onLeave = () => setVisible(false);
+    const onMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      if (isFirstMove) {
+        ringX.jump(e.clientX);
+        ringY.jump(e.clientY);
+        isFirstMove = false;
+        setVisible(true);
+        document.documentElement.classList.add("has-custom-cursor");
+      }
+    };
+    const onEnter = () => {
+      setVisible(true);
+      document.documentElement.classList.add("has-custom-cursor");
+    };
+    const onLeave = () => {
+      setVisible(false);
+      document.documentElement.classList.remove("has-custom-cursor");
+    };
     const onDown = () => setClicking(true);
     const onUp = () => setClicking(false);
     const onOver = (e: MouseEvent) => {
@@ -75,8 +93,9 @@ export function CustomCursor() {
       document.removeEventListener("mouseover", onOver);
       document.removeEventListener("mouseout", onOut);
       observer.disconnect();
+      document.documentElement.classList.remove("has-custom-cursor");
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, ringX, ringY]);
 
   if (!ready) return null;
 

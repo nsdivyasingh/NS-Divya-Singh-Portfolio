@@ -24,9 +24,12 @@ body {
   color: #ffffff;
 }
 
-/* Custom cursor — hide default on pointer devices; touch devices retain default */
+/* Custom cursor — hide default on pointer devices only when the custom cursor is active */
 @media (pointer: fine) {
-  *, *::before, *::after {
+  .has-custom-cursor,
+  .has-custom-cursor *,
+  .has-custom-cursor *::before,
+  .has-custom-cursor *::after {
     cursor: none !important;
   }
 }

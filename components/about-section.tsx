@@ -54,12 +54,12 @@ export function AboutSection() {
         ref={bgWordRef}
         aria-hidden
         className="pointer-events-none absolute left-[20px] top-[6%] select-none font-extrabold uppercase leading-none tracking-[-0.05em] text-[#9D0409] will-change-transform"
-        style={{ fontSize: "250px", opacity: 0.15}}
+        style={{ fontSize: "clamp(80px, 16vw, 160px)", opacity: 0.2 }}
       >
         ABOUT
       </span>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1500px] px-16 py-24">
+      <div className="relative z-10 mx-auto w-full max-w-[1500px] px-6 sm:px-12 md:px-16 py-24">
         {/* Heading + copy */}
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
           <motion.div
@@ -71,7 +71,7 @@ export function AboutSection() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accentRed">
               01
             </p>
-            <h2 className="mt-3 text-[42px] font-extrabold leading-[1.05] tracking-[-0.04em] text-textPrimary">
+            <h2 className="mt-3 text-3xl sm:text-4xl md:text-[42px] font-extrabold leading-[1.05] tracking-[-0.04em] text-textPrimary">
               About Me
             </h2>
           </motion.div>
@@ -83,12 +83,12 @@ export function AboutSection() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
           >
-            <p className="text-[18px] leading-[1.7] text-textSecondary">
+            <p className="text-base sm:text-lg md:text-[18px] leading-[1.7] text-textSecondary">
               I&apos;m an AI Engineer and Researcher passionate about building
               intelligent systems, publishing impactful research, and turning
               ideas into real-world products.
             </p>
-            <p className="text-[18px] leading-[1.7] text-textSecondary">
+            <p className="text-base sm:text-lg md:text-[18px] leading-[1.7] text-textSecondary">
               My work spans AI/ML, full-stack development, research,
               hackathons, and startup projects.
             </p>

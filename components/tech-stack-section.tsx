@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { ParticleCard } from "./magic-bento";
 
 const techStack = [
   {
@@ -81,10 +82,17 @@ function StackCard({ category, skills }: { category: string; skills: string[] })
     <motion.div
       variants={cardVariants}
       whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }}
-      className="group relative flex h-full flex-col bg-white border border-black/5 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:shadow-red-500/5 transition-all duration-500"
+      className="magic-bento-card--border-glow group relative flex h-full flex-col bg-white border border-black/5 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:shadow-red-500/5 transition-all duration-500"
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--glow-x", `${((e.clientX - r.left) / r.width) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-y", `${((e.clientY - r.top) / r.height) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-intensity", "1");
+      }}
+      onMouseLeave={(e) => e.currentTarget.style.setProperty("--glow-intensity", "0")}
     >
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-red-500/0 via-red-500/0 to-red-500/0 group-hover:from-red-500/5 group-hover:to-red-500/5 transition-all duration-500 pointer-events-none" />
-      <div className="relative z-10 flex h-full flex-col">
+      <ParticleCard className="relative z-10 flex h-full flex-col" particleCount={4}>
         <h3 className="text-sm font-semibold text-black mb-4 tracking-tight">
           {category}
         </h3>
@@ -102,7 +110,7 @@ function StackCard({ category, skills }: { category: string; skills: string[] })
             </motion.button>
           ))}
         </div>
-      </div>
+      </ParticleCard>
     </motion.div>
   );
 }

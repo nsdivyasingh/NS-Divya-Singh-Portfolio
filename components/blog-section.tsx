@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ParticleCard } from "./magic-bento";
 
 export function BlogSection() {
   return (
@@ -45,14 +46,24 @@ export function BlogSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="group bg-white border border-gray-200 rounded-[2.5rem] p-2 relative flex flex-col items-center hover:scale-[1.01] hover:border-red-400 hover:shadow-[0_20px_50px_rgba(255,42,42,0.06)] transition-all duration-700 max-w-4xl mx-auto"
+          className="magic-bento-card--border-glow group bg-white border border-gray-200 rounded-[2.5rem] p-2 relative flex flex-col items-center hover:scale-[1.01] hover:border-red-400 hover:shadow-[0_20px_50px_rgba(255,42,42,0.06)] transition-all duration-700 max-w-4xl mx-auto"
+          onMouseMove={(e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            e.currentTarget.style.setProperty("--glow-x", `${((e.clientX - r.left) / r.width) * 100}%`);
+            e.currentTarget.style.setProperty("--glow-y", `${((e.clientY - r.top) / r.height) * 100}%`);
+            e.currentTarget.style.setProperty("--glow-intensity", "1");
+          }}
+          onMouseLeave={(e) => e.currentTarget.style.setProperty("--glow-intensity", "0")}
         >
           {/* Rivet design */}
           <div className="w-5 h-5 bg-gradient-to-br from-gray-300 to-gray-100 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] absolute top-4 border border-gray-300 z-10 flex items-center justify-center">
             <div className="w-1.5 h-1.5 bg-gray-800 rounded-full opacity-10" />
           </div>
 
-          <div className="w-full h-full rounded-[2rem] mt-8 p-8 md:p-12 flex flex-col md:flex-row justify-between gap-8 bg-[#f4f4f4] group-hover:bg-red-50/10 transition-colors duration-700">
+          <ParticleCard
+            className="w-full h-full rounded-[2rem] mt-8 p-8 md:p-12 flex flex-col md:flex-row justify-between gap-8 bg-[#f4f4f4] group-hover:bg-red-50/10 transition-colors duration-700"
+            particleCount={6}
+          >
             <div className="flex-1 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-6">
@@ -115,7 +126,7 @@ export function BlogSection() {
                 </svg>
               </div>
             </div>
-          </div>
+          </ParticleCard>
         </motion.div>
       </div>
     </section>

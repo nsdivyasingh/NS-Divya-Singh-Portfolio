@@ -6,6 +6,7 @@
   contain: layout style;
 }
 
+/* ── Desktop SVG curved marquee (shown ≥768px) ─────────────── */
 .curved-loop-svg {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -14,14 +15,49 @@
   overflow: visible;
   display: block;
   /*
-    2vw keeps the font in constant SVG user-unit size at any viewport width.
-    When viewport = W px, CSS 2vw = 0.02W px. The SVG viewBox is 1440 wide,
-    so the user-unit scale = 1440/W, giving: 0.02W × (1440/W) = 28.8 SVG units
-    regardless of W. This ensures the text always fits the path.
+    2vw keeps the font at a constant 28.8 SVG user-unit size regardless of
+    viewport width: CSS 2vw = 0.02W px; user-unit scale = 1440/W;
+    result = 0.02W × (1440/W) = 28.8 — always fits the path.
   */
   font-size: 2vw;
   fill: #ff2a2a;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.02em;
+}
+
+/* ── Mobile flat marquee (shown <768px) ─────────────────────── */
+.curved-loop-flat {
+  display: none;
+  width: 100%;
+  overflow: hidden;
+  padding: 6px 0;
+}
+
+.curved-loop-flat__track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  animation: cl-scroll var(--cl-dur, 8s) linear infinite;
+  will-change: transform;
+}
+
+.curved-loop-flat__track span {
+  display: inline-block;
+  font-size: clamp(15px, 4.5vw, 20px);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #ff2a2a;
+  flex-shrink: 0;
+}
+
+@keyframes cl-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 767px) {
+  .curved-loop-svg  { display: none; }
+  .curved-loop-flat { display: block; }
 }

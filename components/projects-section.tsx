@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, animate, useMotionValue, type Variants } from "framer-motion";
 import { Caveat } from "next/font/google";
 import { ChevronLeft, ChevronRight, Github, Lock, ShieldCheck } from "lucide-react";
+import { ParticleCard } from "./magic-bento";
 
 const caveat = Caveat({ subsets: ["latin"] });
 
@@ -136,13 +137,23 @@ function FeaturedProjectCard({ project, index }: { project: FeaturedProject; ind
   return (
     <motion.div
       variants={cardVariants}
-      className={`group bg-white border border-gray-200 rounded-[2rem] p-1.5 relative flex flex-col items-center hover:scale-[1.02] ${rotate} hover:border-red-400 hover:shadow-[0_20px_50px_rgba(255,42,42,0.12)] transition-all duration-700`}
+      className={`magic-bento-card--border-glow group bg-white border border-gray-200 rounded-[2rem] p-1.5 relative flex flex-col items-center hover:scale-[1.02] ${rotate} hover:border-red-400 hover:shadow-[0_20px_50px_rgba(255,42,42,0.12)] transition-all duration-700`}
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--glow-x", `${((e.clientX - r.left) / r.width) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-y", `${((e.clientY - r.top) / r.height) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-intensity", "1");
+      }}
+      onMouseLeave={(e) => e.currentTarget.style.setProperty("--glow-intensity", "0")}
     >
       <div className="w-4 h-4 bg-gradient-to-br from-gray-300 to-gray-100 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] absolute top-3 border border-gray-300 z-10 flex items-center justify-center">
         <div className="w-1.5 h-1.5 bg-gray-800 rounded-full opacity-10" />
       </div>
 
-      <div className="w-full h-full rounded-[1.4rem] mt-6 p-6 flex flex-col justify-between min-h-[310px] bg-[#f4f4f4] group-hover:bg-red-50/20 transition-colors duration-700">
+      <ParticleCard
+        className="w-full h-full rounded-[1.4rem] mt-6 p-6 flex flex-col justify-between min-h-[310px] bg-[#f4f4f4] group-hover:bg-red-50/20 transition-colors duration-700"
+        particleCount={5}
+      >
         <div>
           <span className="text-xs uppercase tracking-wider font-extrabold text-[#ff2a2a]/90 block mb-2">
             {project.category}
@@ -197,7 +208,7 @@ function FeaturedProjectCard({ project, index }: { project: FeaturedProject; ind
             )}
           </div>
         </div>
-      </div>
+      </ParticleCard>
     </motion.div>
   );
 }
