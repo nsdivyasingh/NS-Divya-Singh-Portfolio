@@ -1,0 +1,38 @@
+.glare-hover-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.glare-hover-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--gh-br);
+  background: linear-gradient(
+    var(--gh-angle),
+    hsla(0, 0%, 0%, 0) 55%,
+    var(--gh-rgba) 68%,
+    hsla(0, 0%, 0%, 0) 80%,
+    hsla(0, 0%, 0%, 0) 100%
+  );
+  transition: background-position var(--gh-duration) ease;
+  background-size: var(--gh-size) var(--gh-size), 100% 100%;
+  background-repeat: no-repeat;
+  background-position: -100% -100%, 0 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.glare-hover-wrap:hover::before {
+  background-position: 150% 150%, 0 0;
+}
+
+.glare-play-once::before {
+  transition: none;
+}
+
+.glare-play-once:hover::before {
+  transition: background-position var(--gh-duration) ease;
+  background-position: 150% 150%, 0 0;
+}
