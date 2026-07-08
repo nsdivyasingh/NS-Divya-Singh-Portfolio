@@ -1,0 +1,53 @@
+/* ── Border-glow effect ─────────────────────────────────────────────────────── */
+
+/* Set the red glow colour for all cards in this portfolio */
+.magic-bento-card--border-glow {
+  --glow-color: 255, 42, 42;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 220px;
+}
+
+/* Cursor-tracking border glow via mask technique */
+.magic-bento-card--border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: radial-gradient(
+    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.85)) 0%,
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.4))  35%,
+    transparent 60%
+  );
+  border-radius: inherit;
+  /* mask: show only the border strip, hide the interior */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Particle host ──────────────────────────────────────────────────────────── */
+
+.bento-particle-host {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Particles appended by JS */
+.bento-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 30;
+}
