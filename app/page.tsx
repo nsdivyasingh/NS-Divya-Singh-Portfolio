@@ -14,6 +14,7 @@ import { CurvedLoop } from "@/components/curved-loop";
 import { ProjectsSection } from "@/components/projects-section";
 import { ResearchSection } from "@/components/research-section";
 import { BlogSection } from "@/components/blog-section";
+import { RibbonsPlayground } from "@/components/ribbons-playground";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { TechStackSection } from "@/components/tech-stack-section";
 
@@ -41,6 +42,7 @@ export default function Home() {
       <ProjectsSection />
       <ResearchSection />
       <BlogSection />
+      <RibbonsPlayground />
       <ContactSection />
       <Footer />
     </>
