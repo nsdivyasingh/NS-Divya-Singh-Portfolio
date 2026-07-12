@@ -1,0 +1,19 @@
+# OneDrive does not natively read this file.
+# To actually exclude these folders from OneDrive sync, run the PowerShell
+# commands below in the project directory (as Administrator if needed):
+#
+#   attrib +P .next /S /D
+#   attrib +P node_modules /S /D
+#
+# The +P flag marks the folder as "locally available only" (pinned offline),
+# which stops OneDrive from uploading it to the cloud.
+# Re-run after each fresh install / build if the folder is recreated.
+
+.next
+node_modules
+.vercel
+.turbo
+dist
+build
+out
+*.tsbuildinfo
