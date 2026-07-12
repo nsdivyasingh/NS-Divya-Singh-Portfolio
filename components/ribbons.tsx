@@ -189,9 +189,24 @@ export function Ribbons({
         );
       }
 
+      // Non-passive so we can call preventDefault() and stop the page scrolling
+      // while the user drags inside the ribbon canvas on touch devices.
+      function onTouchMove(e: TouchEvent) {
+        e.preventDefault();
+        const t = e.touches[0];
+        if (!t) return;
+        mouseActive = true;
+        const rect = el.getBoundingClientRect();
+        mouse.set(
+          ((t.clientX - rect.left) / el.clientWidth) * 2 - 1,
+          ((t.clientY - rect.top) / el.clientHeight) * -2 + 1,
+          0
+        );
+      }
+
       el.addEventListener("mousemove", updateMouse);
       el.addEventListener("touchstart", updateMouse, { passive: true });
-      el.addEventListener("touchmove", updateMouse, { passive: true });
+      el.addEventListener("touchmove", onTouchMove, { passive: false });
 
       // Higher maxAge → lower alpha → each point follows more slowly → longer ribbon
       // maxAge=0 → alpha=0.99 (near-instant snap = dot/very short)
@@ -248,7 +263,7 @@ export function Ribbons({
         window.removeEventListener("resize", resize);
         el.removeEventListener("mousemove", updateMouse);
         el.removeEventListener("touchstart", updateMouse);
-        el.removeEventListener("touchmove", updateMouse);
+        el.removeEventListener("touchmove", onTouchMove);
         if (canvas.parentNode === el) el.removeChild(canvas);
       };
     });

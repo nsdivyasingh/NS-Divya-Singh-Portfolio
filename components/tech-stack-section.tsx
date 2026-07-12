@@ -90,6 +90,22 @@ function StackCard({ category, skills }: { category: string; skills: string[] })
         e.currentTarget.style.setProperty("--glow-intensity", "1");
       }}
       onMouseLeave={(e) => e.currentTarget.style.setProperty("--glow-intensity", "0")}
+      onTouchStart={(e) => {
+        const t = e.touches[0];
+        if (!t) return;
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--glow-x", `${((t.clientX - r.left) / r.width) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-y", `${((t.clientY - r.top) / r.height) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-intensity", "1");
+      }}
+      onTouchMove={(e) => {
+        const t = e.touches[0];
+        if (!t) return;
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--glow-x", `${((t.clientX - r.left) / r.width) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-y", `${((t.clientY - r.top) / r.height) * 100}%`);
+      }}
+      onTouchEnd={(e) => e.currentTarget.style.setProperty("--glow-intensity", "0")}
     >
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-red-500/0 via-red-500/0 to-red-500/0 group-hover:from-red-500/5 group-hover:to-red-500/5 transition-all duration-500 pointer-events-none" />
       <ParticleCard className="relative z-10 flex h-full flex-col" particleCount={4}>

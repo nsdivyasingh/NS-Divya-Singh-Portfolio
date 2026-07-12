@@ -156,6 +156,8 @@ export function ParticleCard({
     el.addEventListener("mouseleave", onLeave);
     el.addEventListener("mousemove", onMove);
     el.addEventListener("click", onClick);
+    el.addEventListener("touchstart", onEnter, { passive: true });
+    el.addEventListener("touchend", onLeave);
 
     return () => {
       isHoveredRef.current = false;
@@ -163,6 +165,8 @@ export function ParticleCard({
       el.removeEventListener("mouseleave", onLeave);
       el.removeEventListener("mousemove", onMove);
       el.removeEventListener("click", onClick);
+      el.removeEventListener("touchstart", onEnter);
+      el.removeEventListener("touchend", onLeave);
       clearParticles();
     };
   }, [spawnParticles, clearParticles, enableTilt, enableMagnetism, clickEffect, glowColor]);

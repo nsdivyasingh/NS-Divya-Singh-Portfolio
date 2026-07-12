@@ -166,7 +166,7 @@ export function ExpertiseSection() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight relative">
             Building Modern Digital Solutions with Code & AI
             <svg
-              className="absolute -bottom-10 right-10 w-12 h-12 text-gray-800"
+              className="hidden md:block absolute -bottom-10 right-10 w-12 h-12 text-gray-800"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -220,39 +220,6 @@ export function ExpertiseSection() {
           />
         </svg>
 
-        <svg
-          className="md:hidden absolute top-0 left-[50%] -translate-x-1/2 w-4 h-[100%] pointer-events-none z-0"
-          viewBox="0 0 4 100"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M 2,0 L 2,100"
-            fill="none"
-            stroke="#cbd5e1"
-            strokeWidth="4"
-            strokeDasharray="4 6"
-            vectorEffect="non-scaling-stroke"
-          />
-          <mask id="expertise-path-mask-mobile">
-            <motion.path
-              d="M 2,0 L 2,100"
-              fill="none"
-              stroke="white"
-              strokeWidth="4"
-              style={{ pathLength }}
-              vectorEffect="non-scaling-stroke"
-            />
-          </mask>
-          <path
-            d="M 2,0 L 2,100"
-            fill="none"
-            stroke="#ff2a2a"
-            strokeWidth="4"
-            strokeDasharray="4 6"
-            mask="url(#expertise-path-mask-mobile)"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
 
         <div className="flex flex-col gap-8 md:gap-12 items-center md:block relative z-10 w-full pt-4 md:pt-0 pb-12 md:pb-0">
           {cards.map((card) => (

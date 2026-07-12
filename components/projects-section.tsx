@@ -137,7 +137,7 @@ function FeaturedProjectCard({ project, index }: { project: FeaturedProject; ind
   return (
     <motion.div
       variants={cardVariants}
-      className={`magic-bento-card--border-glow group bg-white border border-gray-200 rounded-[2rem] p-1.5 relative flex flex-col items-center hover:scale-[1.02] ${rotate} hover:border-red-400 hover:shadow-[0_20px_50px_rgba(255,42,42,0.12)] transition-all duration-700`}
+      className={`magic-bento-card--border-glow group bg-white border border-gray-200 rounded-[2rem] p-1.5 relative flex flex-col items-center hover:scale-[1.02] active:scale-[1.02] ${rotate} hover:border-red-400 hover:shadow-[0_20px_50px_rgba(255,42,42,0.12)] transition-all duration-700`}
       onMouseMove={(e) => {
         const r = e.currentTarget.getBoundingClientRect();
         e.currentTarget.style.setProperty("--glow-x", `${((e.clientX - r.left) / r.width) * 100}%`);
@@ -145,6 +145,22 @@ function FeaturedProjectCard({ project, index }: { project: FeaturedProject; ind
         e.currentTarget.style.setProperty("--glow-intensity", "1");
       }}
       onMouseLeave={(e) => e.currentTarget.style.setProperty("--glow-intensity", "0")}
+      onTouchStart={(e) => {
+        const t = e.touches[0];
+        if (!t) return;
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--glow-x", `${((t.clientX - r.left) / r.width) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-y", `${((t.clientY - r.top) / r.height) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-intensity", "1");
+      }}
+      onTouchMove={(e) => {
+        const t = e.touches[0];
+        if (!t) return;
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--glow-x", `${((t.clientX - r.left) / r.width) * 100}%`);
+        e.currentTarget.style.setProperty("--glow-y", `${((t.clientY - r.top) / r.height) * 100}%`);
+      }}
+      onTouchEnd={(e) => e.currentTarget.style.setProperty("--glow-intensity", "0")}
     >
       <div className="w-4 h-4 bg-gradient-to-br from-gray-300 to-gray-100 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] absolute top-3 border border-gray-300 z-10 flex items-center justify-center">
         <div className="w-1.5 h-1.5 bg-gray-800 rounded-full opacity-10" />

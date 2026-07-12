@@ -14,7 +14,7 @@ const education = {
   institution: "AMC Engineering College",
   location: "Bangalore, Karnataka",
   period: "Dec 2022 – May 2026",
-  cgpa: "8.9 / 10",
+  cgpa: "9 / 10",
   university: "Visvesvaraya Technological University",
 };
 
@@ -73,16 +73,18 @@ const experiences = [
 ];
 
 function glowHandlers() {
+  function applyGlow(el: HTMLDivElement, clientX: number, clientY: number) {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--glow-x", `${((clientX - r.left) / r.width) * 100}%`);
+    el.style.setProperty("--glow-y", `${((clientY - r.top) / r.height) * 100}%`);
+    el.style.setProperty("--glow-intensity", "1");
+  }
   return {
-    onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-      const r = e.currentTarget.getBoundingClientRect();
-      e.currentTarget.style.setProperty("--glow-x", `${((e.clientX - r.left) / r.width) * 100}%`);
-      e.currentTarget.style.setProperty("--glow-y", `${((e.clientY - r.top) / r.height) * 100}%`);
-      e.currentTarget.style.setProperty("--glow-intensity", "1");
-    },
-    onMouseLeave(e: React.MouseEvent<HTMLDivElement>) {
-      e.currentTarget.style.setProperty("--glow-intensity", "0");
-    },
+    onMouseMove(e: React.MouseEvent<HTMLDivElement>) { applyGlow(e.currentTarget, e.clientX, e.clientY); },
+    onMouseLeave(e: React.MouseEvent<HTMLDivElement>) { e.currentTarget.style.setProperty("--glow-intensity", "0"); },
+    onTouchStart(e: React.TouchEvent<HTMLDivElement>) { const t = e.touches[0]; if (t) applyGlow(e.currentTarget, t.clientX, t.clientY); },
+    onTouchMove(e: React.TouchEvent<HTMLDivElement>) { const t = e.touches[0]; if (t) applyGlow(e.currentTarget, t.clientX, t.clientY); },
+    onTouchEnd(e: React.TouchEvent<HTMLDivElement>) { e.currentTarget.style.setProperty("--glow-intensity", "0"); },
   };
 }
 
@@ -157,7 +159,7 @@ export function ExperienceSection() {
 
             {/* Glow wrapper */}
             <div
-              className="magic-bento-card--border-glow relative rounded-[2rem] bg-white border border-lightBeige shadow-[0_8px_32px_rgba(0,0,0,0.06)] overflow-hidden hover:scale-[1.01] transition-transform duration-300 cursor-default"
+              className="magic-bento-card--border-glow relative rounded-[2rem] bg-white border border-lightBeige shadow-[0_8px_32px_rgba(0,0,0,0.06)] overflow-hidden hover:scale-[1.01] active:scale-[1.01] transition-transform duration-300 cursor-default"
               {...handlers}
             >
               {/* Top accent bar */}
@@ -204,7 +206,7 @@ export function ExperienceSection() {
                   </div>
                   <div className="flex-1">
                     <div className="h-2 w-full rounded-full bg-gray-200 overflow-hidden">
-                      <div className="h-full w-[89%] rounded-full bg-[#ff2a2a]" />
+                      <div className="h-full w-[90%] rounded-full bg-[#ff2a2a]" />
                     </div>
                     <p className="text-[10px] text-textSecondary opacity-40 mt-1 text-right">out of 10</p>
                   </div>
@@ -261,7 +263,7 @@ export function ExperienceSection() {
 
                       {/* Card: glow wrapper */}
                       <div
-                        className="magic-bento-card--border-glow relative rounded-2xl hover:scale-[1.01] transition-transform duration-300 cursor-default"
+                        className="magic-bento-card--border-glow relative rounded-2xl hover:scale-[1.01] active:scale-[1.01] transition-transform duration-300 cursor-default"
                         {...handlers}
                       >
                         <ParticleCard
