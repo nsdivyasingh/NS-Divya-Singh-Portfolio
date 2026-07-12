@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
 import { CustomCursor } from "@/components/custom-cursor";
+import { ExperienceSection } from "@/components/experience-section";
 import { ExpertiseSection } from "@/components/expertise-section";
 import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/hero-section";
@@ -29,6 +30,7 @@ export default function Home() {
       {!introDone && <IntroLoader onComplete={() => setIntroDone(true)} />}
       <HeroSection />
       <AboutSection />
+      <ExperienceSection />
       <ExpertiseSection />
       <TechStackSection />
       <div className="bg-white py-4 border-y border-gray-100">

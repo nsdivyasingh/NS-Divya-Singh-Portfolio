@@ -22,7 +22,7 @@ export function HeroSection() {
 
       {/* Hero Content */}
       <motion.div
-        className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1500px] items-start px-6 sm:px-12 md:px-16 pt-40"
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1500px] items-start px-6 sm:px-12 md:px-16 pt-28 sm:pt-36 md:pt-40"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -75,7 +75,7 @@ export function HeroSection() {
                 variant="outline"
                 className="h-12 rounded-full border-white/50 bg-transparent px-6 text-sm font-semibold text-white hover:bg-white hover:text-black"
               >
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" download>
+                <a href="/DivyaSingh-AIML.pdf" target="_blank" rel="noopener noreferrer" download>
                   Download Resume
                 </a>
               </Button>
