@@ -9,9 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { value: "20+", label: "Projects" },
-  { value: "5+", label: "Research Publications" },
-  { value: "10+", label: "Hackathons" },
+  { value: "10+", label: "Projects" },
+  { value: "2", label: "Research Publications" },
+  { value: "8+", label: "Hackathons" },
   { value: "2+", label: "Years Building" },
 ];
 

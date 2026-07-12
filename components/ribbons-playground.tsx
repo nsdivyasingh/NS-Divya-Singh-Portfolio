@@ -71,7 +71,7 @@ export function RibbonsPlayground() {
   const canvasKey = `${count}-${thickness}-${speed}-${trail}`;
 
   return (
-    <section className="bg-[#0a0a0a] w-full py-20 md:py-28 px-6 relative overflow-hidden border-t border-white/5">
+    <section id="ribbons" className="bg-[#0a0a0a] w-full py-20 md:py-28 px-6 relative overflow-hidden border-t border-white/5">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
