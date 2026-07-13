@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
 import { CustomCursor } from "@/components/custom-cursor";
@@ -9,7 +5,7 @@ import { ExperienceSection } from "@/components/experience-section";
 import { ExpertiseSection } from "@/components/expertise-section";
 import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/hero-section";
-import { IntroLoader } from "@/components/intro-loader";
+import { IntroWrapper } from "@/components/intro-wrapper";
 import { Navbar } from "@/components/navbar";
 import { CurvedLoop } from "@/components/curved-loop";
 import { ProjectsSection } from "@/components/projects-section";
@@ -21,14 +17,12 @@ import { SmoothScroll } from "@/components/smooth-scroll";
 import { TechStackSection } from "@/components/tech-stack-section";
 
 export default function Home() {
-  const [introDone, setIntroDone] = useState(false);
-
   return (
     <>
       <SmoothScroll />
       <CustomCursor />
       <Navbar />
-      {!introDone && <IntroLoader onComplete={() => setIntroDone(true)} />}
+      <IntroWrapper />
       <HeroSection />
       <AboutSection />
       <ExperienceSection />

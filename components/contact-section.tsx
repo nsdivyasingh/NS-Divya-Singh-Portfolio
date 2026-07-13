@@ -149,47 +149,27 @@ export function ContactSection() {
                   I give permission to contact me at this email address.
                 </label>
               </div>
-              <div className="flex-1 flex flex-col gap-8 text-xs text-white/70 font-medium">
-                <p className="leading-relaxed max-w-[400px]">
-                  This site is protected by reCAPTCHA and the Google{" "}
-                  <a href="#" className="underline hover:text-white transition-colors">
-                    Privacy Policy
-                  </a>{" "}
-                  and{" "}
-                  <a href="#" className="underline hover:text-white transition-colors">
-                    Terms of Service
-                  </a>{" "}
-                  apply.
-                </p>
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6">
-                  <p className="max-w-[250px] leading-relaxed">
-                    For information on how to unsubscribe, please review our{" "}
-                    <a href="#" className="underline hover:text-white transition-colors">
-                      privacy policy
-                    </a>
-                    .
-                  </p>
-                  <button
-                    type="submit"
-                    suppressHydrationWarning
-                    className="px-8 py-3 rounded-full border border-white/40 text-white font-bold flex items-center justify-center gap-3 hover:bg-white hover:text-[#ff2a2a] transition-all duration-300 group whitespace-nowrap self-start sm:self-auto"
+              <div className="flex-1 flex justify-end items-end">
+                <button
+                  type="submit"
+                  suppressHydrationWarning
+                  className="px-8 py-3 rounded-full border border-white/40 text-white font-bold flex items-center justify-center gap-3 hover:bg-white hover:text-[#ff2a2a] transition-all duration-300 group whitespace-nowrap self-start"
+                >
+                  Send
+                  <svg
+                    className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    Send
-                    <svg
-                      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                      />
-                    </svg>
-                  </button>
-                </div>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
           </form>
