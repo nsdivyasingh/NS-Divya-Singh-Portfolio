@@ -11,6 +11,7 @@ import { Navbar } from "@/components/navbar";
 import { CurvedLoop } from "@/components/curved-loop";
 import { ProjectsSection } from "@/components/projects-section";
 import { ResearchSection } from "@/components/research-section";
+import { AchievementsSection } from "@/components/achievements-section";
 import { BlogSection } from "@/components/blog-section";
 import { RibbonsPlayground } from "@/components/ribbons-playground";
 import { SnakeGame } from "@/components/snake-game";
@@ -39,6 +40,7 @@ export default function Home() {
       </div>
       <ProjectsSection />
       <ResearchSection />
+      <AchievementsSection />
       <BlogSection />
       <RibbonsPlayground />
       <SnakeGame />
