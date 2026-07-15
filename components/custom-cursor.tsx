@@ -108,7 +108,7 @@ export function CustomCursor() {
     <>
       {/* Dot — snaps instantly, shrinks on hover */}
       <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full"
+        className="fixed top-0 left-0 z-[10010] pointer-events-none rounded-full"
         style={{
           width: 10,
           height: 10,
@@ -126,7 +126,7 @@ export function CustomCursor() {
       />
       {/* Ring — spring-lagged, expands on hover */}
       <motion.div
-        className="fixed top-0 left-0 z-[9998] pointer-events-none rounded-full border-2"
+        className="fixed top-0 left-0 z-[10009] pointer-events-none rounded-full border-2"
         style={{
           width: 40,
           height: 40,

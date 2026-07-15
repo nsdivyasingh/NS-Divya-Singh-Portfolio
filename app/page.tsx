@@ -1,4 +1,5 @@
 import { AboutSection } from "@/components/about-section";
+import { PortfolioChat } from "@/components/portfolio-chat";
 import { ContactSection } from "@/components/contact-section";
 import { CustomCursor } from "@/components/custom-cursor";
 import { ExperienceSection } from "@/components/experience-section";
@@ -43,6 +44,7 @@ export default function Home() {
       <SnakeGame />
       <ContactSection />
       <Footer />
+      <PortfolioChat />
     </>
   );
 }
