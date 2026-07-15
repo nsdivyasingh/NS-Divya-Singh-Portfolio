@@ -79,9 +79,9 @@ export function ContactSection() {
             Reach Us
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-12 md:gap-16 w-full">
-            <div className="flex flex-col md:flex-row gap-12 md:gap-20 w-full">
-              <div className="flex-1 flex flex-col gap-10">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-8 md:gap-16 w-full">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-20 w-full">
+              <div className="flex-1 flex flex-col gap-6 md:gap-10">
                 <div className="relative">
                   <input
                     type="text"
@@ -134,7 +134,7 @@ export function ContactSection() {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-12 mt-4">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-12 mt-4">
               <div className="flex-1 flex items-start gap-4 text-sm font-medium text-white/90">
                 <input
                   type="checkbox"

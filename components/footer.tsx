@@ -65,7 +65,7 @@ export function Footer() {
         <div className="flex flex-col gap-1 md:items-center">
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="underline hover:text-white transition-colors underline-offset-4 decoration-1 lowercase"
+            className="underline hover:text-white transition-colors underline-offset-4 decoration-1 lowercase break-all"
           >
             {CONTACT_EMAIL}
           </a>
